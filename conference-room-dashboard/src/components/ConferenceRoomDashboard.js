@@ -7,7 +7,7 @@ const ConferenceRoomDashboard = () => {
       id: index + 1,
       status: Math.random() > 0.5 ? 'on' : 'off',
       pairing: Math.random() > 0.7,
-          }))
+    }))
   );
 
   // 필터 상태 (all, on, off)
@@ -96,7 +96,7 @@ const ConferenceRoomDashboard = () => {
   const styles = {
     container: {
       minHeight: '100vh',
-      backgroundColor: '#f9fafb',
+      backgroundColor: '#f0f4f8',
       padding: '1.5rem'
     },
     title: {
@@ -107,9 +107,9 @@ const ConferenceRoomDashboard = () => {
     },
     statusBox: {
       marginBottom: '1.5rem',
-      borderRadius: '0.5rem',
+      borderRadius: '0.75rem',
       overflow: 'hidden',
-      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+      boxShadow: '0 4px 15px -3px rgba(49, 130, 246, 0.15), 0 2px 6px -2px rgba(49, 130, 246, 0.1)',
       backgroundColor: mainColor,
       color: 'white'
     },
@@ -125,22 +125,24 @@ const ConferenceRoomDashboard = () => {
       fontWeight: 'bold'
     },
     unavailableList: {
-      padding: '0.5rem 1rem',
+      padding: '0.75rem 1rem',
       fontSize: '0.875rem',
-      backgroundColor: 'rgba(0, 0, 0, 0.1)'
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      borderTop: '1px solid rgba(255, 255, 255, 0.1)'
     },
     buttonContainer: {
       display: 'flex', 
-      gap: '0.5rem',
+      gap: '0.75rem',
       marginBottom: '1.5rem'
     },
     button: {
-      padding: '0.5rem 1rem',
-      borderRadius: '0.375rem',
-      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-      transition: 'all 0.3s',
+      padding: '0.5rem 1.25rem',
+      borderRadius: '0.5rem',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+      transition: 'all 0.2s ease',
       cursor: 'pointer',
-      border: 'none'
+      border: 'none',
+      fontWeight: '500'
     },
     buttonActive: {
       backgroundColor: mainColor,
@@ -148,7 +150,10 @@ const ConferenceRoomDashboard = () => {
     },
     buttonInactive: {
       backgroundColor: 'white',
-      color: '#333333'
+      color: '#333333',
+      '&:hover': {
+        backgroundColor: '#f8fafc'
+      }
     },
     gridContainer: {
       display: 'grid',
@@ -157,25 +162,33 @@ const ConferenceRoomDashboard = () => {
     },
     roomCard: {
       position: 'relative',
-      borderRadius: '0.5rem',
-      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+      borderRadius: '0.75rem',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
       overflow: 'hidden',
       backgroundColor: 'white',
       cursor: 'pointer',
-      padding: '0.75rem',
+      padding: '0.5rem',
       borderLeft: '4px solid transparent',
-      transition: 'height 0.3s ease-in-out, min-height 0.3s ease-in-out'
+      transition: 'all 0.2s ease',
+      height: 'auto',
+      minHeight: '60px',
+      '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+      }
     },
     expandedCard: {
-      minHeight: '260px',
-      backgroundColor: '#f0f5ff',
+      minHeight: '200px',
+      backgroundColor: '#f0f7ff',
       gridRow: 'span 2',
-      zIndex: 10
+      zIndex: 10,
+      boxShadow: '0 4px 15px rgba(49, 130, 246, 0.15)'
     },
     roomHeader: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
+      marginBottom: '0.5rem'
     },
     roomHeaderContent: {
       display: 'flex',
@@ -185,77 +198,106 @@ const ConferenceRoomDashboard = () => {
     },
     roomTitle: {
       fontWeight: 'bold',
-      fontSize: '0.875rem'
+      fontSize: '1rem',
+      color: '#1a202c'
     },
     statusIndicator: {
-      width: '0.6rem',
-      height: '0.6rem',
+      width: '0.75rem',
+      height: '0.75rem',
       borderRadius: '50%',
-      display: 'inline-block'
+      display: 'inline-block',
+      boxShadow: '0 0 4px rgba(0, 0, 0, 0.1)'
     },
     location: {
       fontSize: '0.75rem',
       color: '#6b7280',
+      marginLeft: '0.25rem'
     },
     roomControls: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: '8px',
+      marginTop: '0',
     },
     pairingButton: {
       fontSize: '0.75rem',
-      padding: '2px 8px',
-      borderRadius: '0.25rem',
+      padding: '0.15rem 0.5rem',
+      borderRadius: '1rem',
       border: 'none',
       cursor: 'pointer',
-      height: '22px',
-      marginLeft: '6px',
-      marginRight: '4px'
+      height: '1.5rem',
+      backgroundColor: 'rgba(49, 130, 246, 0.1)',
+      color: mainColor,
+      fontWeight: '500',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      transition: 'all 0.2s ease',
+      '&:hover': {
+        backgroundColor: 'rgba(49, 130, 246, 0.15)'
+      }
     },
     expandToggle: {
       border: 'none',
       backgroundColor: 'transparent',
       color: mainColor,
       cursor: 'pointer',
-      fontSize: '0.75rem',
-      padding: '2px 8px',
-      margin: '4px auto',
-      textAlign: 'center'
+      fontSize: '1rem',
+      padding: '0.25rem',
+      margin: '0 auto',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      transition: 'all 0.2s ease',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '100%',
+      '&:hover': {
+        color: '#1c64f2'
+      }
     },
     expandButtons: {
       display: 'flex',
-      flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: '8px',
-      marginTop: '12px'
+      gap: '0.5rem',
+      marginTop: '0.75rem',
+      padding: '0.25rem'
     },
     expandButtonsRow: {
       display: 'flex',
       width: '100%',
-      gap: '8px'
+      gap: '0.5rem'
     },
     expandButton: {
-      backgroundColor: '#e6f0ff',
+      backgroundColor: 'rgba(49, 130, 246, 0.08)',
       color: '#3182F6',
       border: 'none',
-      padding: '6px 10px',
-      borderRadius: '4px',
+      padding: '0.5rem 0.75rem',
+      borderRadius: '0.5rem',
       cursor: 'pointer',
       textAlign: 'center',
-      fontSize: '12px',
-      flex: 1
+      fontSize: '0.875rem',
+      flex: 1,
+      fontWeight: '500',
+      transition: 'all 0.2s ease',
+      '&:hover': {
+        backgroundColor: 'rgba(49, 130, 246, 0.15)'
+      }
     },
     closeExpandButton: {
       border: 'none',
       backgroundColor: 'transparent',
       color: mainColor,
       cursor: 'pointer',
-      fontSize: '12px',
+      fontSize: '0.875rem',
       textAlign: 'right',
-      marginTop: '8px',
-      width: '100%'
+      marginTop: '0.5rem',
+      width: '100%',
+      fontWeight: '500',
+      transition: 'all 0.2s ease',
+      '&:hover': {
+        color: '#1c64f2'
+      }
     }
   };
 
@@ -332,14 +374,34 @@ const ConferenceRoomDashboard = () => {
               }
             }}
           >
-            <div style={styles.roomHeader}>
-              <div style={styles.roomHeaderContent}>
-                <span style={styles.roomTitle}>회의실 {room.id}</span>
+            <div style={{
+              ...styles.roomHeader,
+              padding: '0',
+              margin: '0',
+              borderBottom: expandedRoom === room.id ? '1px solid rgba(49, 130, 246, 0.1)' : 'none'
+            }}>
+              <div style={{
+                display: 'flex', 
+                alignItems: 'center',
+                gap: '0.25rem'
+              }}>
+                <span style={{...styles.roomTitle, fontSize: '0.875rem'}}>회의실 {room.id}</span>
+                <span style={{...styles.location, fontSize: '0.7rem'}}>{room.id % 9 === 0 ? 9 : room.id % 9}호 {Math.ceil(room.id / 9)}층</span>
+              </div>
+
+              <div style={{
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginLeft: '-0.15rem'
+              }}>
                 <button
                   style={{
                     ...styles.pairingButton,
-                    backgroundColor: room.pairing ? 'rgba(49, 130, 246, 0.1)' : 'rgba(233, 236, 239, 0.5)',
-                    color: mainColor
+                    height: '1.25rem',
+                    fontSize: '0.7rem', 
+                    padding: '0.1rem 0.4rem',
+                    backgroundColor: room.pairing ? 'rgba(49, 130, 246, 0.15)' : 'rgba(233, 236, 239, 0.7)',
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -348,87 +410,133 @@ const ConferenceRoomDashboard = () => {
                 >
                   페어링
                 </button>
-                <span style={styles.location}>{room.location}</span>
-              </div>
-              <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}>
                 <span 
                   style={{
-                    ...styles.statusText,
-                    color: room.status === 'on' ? '#D32F2F' : mainColor
+                    fontSize: '0.65rem',
+                    fontWeight: '500',
+                    color: room.status === 'on' ? '#e53e3e' : '#10b981',
                   }}
                 >
+                  {room.status === 'on' ? '사용 중' : '사용 가능'}
                 </span>
                 <div 
                   style={{
                     ...styles.statusIndicator,
-                    backgroundColor: room.status === 'on' ? mainColor : '#BDBDBD'
+                    width: '0.6rem',
+                    height: '0.6rem',
+                    backgroundColor: room.status === 'on' ? '#3182F6' : '#9CA3AF'
                   }}
                 ></div>
               </div>
+              </div>
             </div>
             
-            <div style={styles.roomControls}>
+            <div style={{
+              ...styles.roomControls,
+              marginTop: '0'
+            }}>
               {expandedRoom !== room.id && (
                 <button
-                  style={styles.expandToggle}
+                  style={{
+                    ...styles.expandToggle
+                  }}
                   onClick={(e) => toggleRoomExpand(room.id, e)}
                 >
-                  더 보기 ▼
+                  ▼
                 </button>
               )}
             </div>
             
             {/* 확장 모드 컨텐츠 */}
             {expandedRoom === room.id && (
-              <div style={{marginTop: 'px'}}>
-                <div style={styles.expandButtons}>
-                  <div style={styles.expandButtonsRow}>
-                    <button 
-                      style={styles.expandButton}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        apiIncreaseVolume(room.id);
-                      }}
-                    >
-                      소리 키우기
-                    </button>
-                    <button 
-                      style={styles.expandButton}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        apiDecreaseVolume(room.id);
-                      }}
-                    >
-                      소리 줄이기
-                    </button>
-                  </div>
-                  <div style={styles.expandButtonsRow}>
-                    <button 
-                      style={styles.expandButton}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        apiTurnOnMic(room.id);
-                      }}
-                    >
-                      마이크 켜기
-                    </button>
-                    <button 
-                      style={styles.expandButton}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        apiTurnOffMic(room.id);
-                      }}
-                    >
-                      마이크 끄기
-                    </button>
-                  </div>
-                  <button
-                    style={styles.closeExpandButton}
-                    onClick={(e) => toggleRoomExpand(room.id, e)}
+              <div style={{
+                marginTop: '1rem',
+                padding: '0.5rem',
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                borderRadius: '0.5rem'
+              }}>
+                <div style={{
+                  ...styles.expandButtons,
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(2, 1fr)',
+                  gap: '0.75rem'
+                }}>
+                  <button 
+                    style={{
+                      ...styles.expandButton,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '2.5rem'
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      apiIncreaseVolume(room.id);
+                    }}
                   >
-                    접기 ▲
+                    소리 키우기
+                  </button>
+                  <button 
+                    style={{
+                      ...styles.expandButton,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '2.5rem'
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      apiDecreaseVolume(room.id);
+                    }}
+                  >
+                    소리 줄이기
+                  </button>
+                  <button 
+                    style={{
+                      ...styles.expandButton,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '2.5rem'
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      apiTurnOnMic(room.id);
+                    }}
+                  >
+                    마이크 켜기
+                  </button>
+                  <button 
+                    style={{
+                      ...styles.expandButton,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '2.5rem'
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      apiTurnOffMic(room.id);
+                    }}
+                  >
+                    마이크 끄기
                   </button>
                 </div>
+                <button
+                  style={{
+                    ...styles.closeExpandButton,
+                    padding: '0.5rem'
+                  }}
+                  onClick={(e) => toggleRoomExpand(room.id, e)}
+                >
+                  ▲
+                </button>
               </div>
             )}
           </div>
