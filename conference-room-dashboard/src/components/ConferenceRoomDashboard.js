@@ -7,8 +7,7 @@ const ConferenceRoomDashboard = () => {
       id: index + 1,
       status: Math.random() > 0.5 ? 'on' : 'off',
       pairing: Math.random() > 0.7,
-      location: `${Math.floor(index / 6) + 1}층 ${(index % 6) + 1}호`
-    }))
+          }))
   );
 
   // 필터 상태 (all, on, off)
@@ -31,94 +30,32 @@ const ConferenceRoomDashboard = () => {
   // API 호출 예시 함수들
   const apiToggleRoomStatus = async (roomId, newStatus) => {
     console.log(`API 호출: 회의실 ${roomId} 상태를 ${newStatus}로 변경`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/status`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ status: newStatus })
-    // });
-    // return response.json();
-    
     // 테스트용 즉시 상태 변경
     toggleRoomStatus(roomId);
   };
   
   const apiTogglePairing = async (roomId, pairingStatus) => {
     console.log(`API 호출: 회의실 ${roomId} 페어링 상태를 ${pairingStatus}로 변경`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/pairing`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ pairing: pairingStatus })
-    // });
-    // return response.json();
-    
     // 테스트용 즉시 상태 변경
     togglePairing(roomId);
   };
   
   const apiIncreaseVolume = async (roomId) => {
     console.log(`API 호출: 회의실 ${roomId} 소리 키우기`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/volume/increase`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' }
-    // });
-    // return response.json();
   };
   
   const apiDecreaseVolume = async (roomId) => {
     console.log(`API 호출: 회의실 ${roomId} 소리 줄이기`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/volume/decrease`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' }
-    // });
-    // return response.json();
   };
   
   const apiTurnOnMic = async (roomId) => {
     console.log(`API 호출: 회의실 ${roomId} 마이크 켜기`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/mic/on`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' }
-    // });
-    // return response.json();
   };
   
   const apiTurnOffMic = async (roomId) => {
     console.log(`API 호출: 회의실 ${roomId} 마이크 끄기`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/mic/off`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' }
-    // });
-    // return response.json();
   };
   
-  const apiAdjustVolume = async (roomId, volume) => {
-    console.log(`API 호출: 회의실 ${roomId} 볼륨을 ${volume}로 조절`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/volume`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ volume })
-    // });
-    // return response.json();
-  };
-  
-  const apiAdjustLighting = async (roomId, brightness) => {
-    console.log(`API 호출: 회의실 ${roomId} 조명 밝기를 ${brightness}로 조절`);
-    // 실제 API 호출 코드
-    // const response = await fetch(`/api/rooms/${roomId}/lighting`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ brightness })
-    // });
-    // return response.json();
-  };
-
   // 페어링 상태 토글
   const togglePairing = (roomId) => {
     setRooms(
@@ -136,19 +73,6 @@ const ConferenceRoomDashboard = () => {
 
   // 메인 색상
   const mainColor = '#3182F6';
-  
-  // 볼륨 및 조명 상태 (테스트용 임시 상태)
-  const [roomSettings, setRoomSettings] = useState({});
-  
-  // 설정 초기화
-  const initRoomSettings = (roomId) => {
-    if (!roomSettings[roomId]) {
-      setRoomSettings(prev => ({
-        ...prev,
-        [roomId]: { volume: 50, lighting: 70 }
-      }));
-    }
-  };
 
   // 룸 확장 토글
   const toggleRoomExpand = (roomId, e) => {
@@ -243,7 +167,7 @@ const ConferenceRoomDashboard = () => {
       transition: 'height 0.3s ease-in-out, min-height 0.3s ease-in-out'
     },
     expandedCard: {
-      minHeight: '300px',
+      minHeight: '260px',
       backgroundColor: '#f0f5ff',
       gridRow: 'span 2',
       zIndex: 10
@@ -251,121 +175,87 @@ const ConferenceRoomDashboard = () => {
     roomHeader: {
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      marginBottom: '0.5rem'
+      alignItems: 'center',
+    },
+    roomHeaderContent: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: '0.5rem'
     },
     roomTitle: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '0.875rem'
     },
     statusIndicator: {
-      width: '0.75rem',
-      height: '0.75rem',
+      width: '0.6rem',
+      height: '0.6rem',
       borderRadius: '50%',
       display: 'inline-block'
     },
     location: {
       fontSize: '0.75rem',
       color: '#6b7280',
-      marginBottom: '0.5rem'
     },
-    roomFooter: {
+    roomControls: {
       display: 'flex',
-      justifyContent: 'space-between',
+      flexDirection: 'column',
       alignItems: 'center',
-      marginTop: '0.5rem'
+      justifyContent: 'center',
+      marginTop: '8px',
     },
     pairingButton: {
       fontSize: '0.75rem',
-      padding: '0.25rem 0.5rem',
+      padding: '2px 8px',
       borderRadius: '0.25rem',
       border: 'none',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      height: '22px',
+      marginLeft: '6px',
+      marginRight: '4px'
     },
-    statusText: {
-      fontSize: '0.75rem'
+    expandToggle: {
+      border: 'none',
+      backgroundColor: 'transparent',
+      color: mainColor,
+      cursor: 'pointer',
+      fontSize: '0.75rem',
+      padding: '2px 8px',
+      margin: '4px auto',
+      textAlign: 'center'
     },
     expandButtons: {
       display: 'flex',
-      flexDirection: 'column',
-      gap: '10px',
-      marginTop: '20px'
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: '8px',
+      marginTop: '12px'
+    },
+    expandButtonsRow: {
+      display: 'flex',
+      width: '100%',
+      gap: '8px'
     },
     expandButton: {
       backgroundColor: '#e6f0ff',
       color: '#3182F6',
       border: 'none',
-      padding: '8px 12px',
+      padding: '6px 10px',
       borderRadius: '4px',
       cursor: 'pointer',
-      textAlign: 'left',
-      fontSize: '14px'
+      textAlign: 'center',
+      fontSize: '12px',
+      flex: 1
     },
-    settingsPanel: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: '100%',
-      zIndex: 10,
-      backgroundColor: 'white',
-      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-      border: '1px solid #e5e7eb',
-      borderBottomLeftRadius: '0.5rem',
-      borderBottomRightRadius: '0.5rem',
-      padding: '0.75rem',
-      marginTop: '0.25rem'
-    },
-    settingsTitle: {
-      fontSize: '0.875rem',
-      fontWeight: '600',
-      marginBottom: '0.5rem'
-    },
-    statusToggleButton: {
-      width: '100%',
-      marginBottom: '0.75rem',
-      padding: '0.375rem 0.75rem',
-      borderRadius: '0.25rem',
-      fontSize: '0.875rem',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+    closeExpandButton: {
       border: 'none',
-      cursor: 'pointer'
-    },
-    sliderContainer: {
-      marginBottom: '0.75rem'
-    },
-    sliderHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '0.25rem'
-    },
-    sliderLabel: {
-      fontSize: '0.75rem',
-      color: '#4b5563'
-    },
-    slider: {
-      width: '100%',
-      height: '0.5rem',
-      backgroundColor: '#e5e7eb',
-      borderRadius: '0.5rem',
-      appearance: 'none',
-      cursor: 'pointer'
-    },
-    buttonRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      gap: '0.5rem'
-    },
-    utilityButton: {
-      flex: 1,
-      padding: '0.375rem 0.5rem',
-      borderRadius: '0.25rem',
-      fontSize: '0.75rem',
-      backgroundColor: '#f3f4f6',
-      color: '#4b5563',
-      border: 'none',
-      cursor: 'pointer'
+      backgroundColor: 'transparent',
+      color: mainColor,
+      cursor: 'pointer',
+      fontSize: '12px',
+      textAlign: 'right',
+      marginTop: '8px',
+      width: '100%'
     }
   };
 
@@ -443,193 +333,100 @@ const ConferenceRoomDashboard = () => {
             }}
           >
             <div style={styles.roomHeader}>
-              <span style={styles.roomTitle}>회의실 {room.id}</span>
-              <div 
-                style={{
-                  ...styles.statusIndicator,
-                  backgroundColor: room.status === 'on' ? mainColor : '#BDBDBD'
-                }}
-              ></div>
-            </div>
-            <div style={styles.location}>{room.location}</div>
-            <div style={styles.roomFooter}>
-              <button
-                style={{
-                  ...styles.pairingButton,
-                  backgroundColor: room.pairing ? 'rgba(49, 130, 246, 0.1)' : 'rgba(233, 236, 239, 0.5)',
-                  color: mainColor
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  apiTogglePairing(room.id, !room.pairing);
-                }}
-              >
-                페어링
-              </button>
-              <span 
-                style={{
-                  ...styles.statusText,
-                  color: room.status === 'on' ? '#D32F2F' : mainColor
-                }}
-              >
-                {room.status === 'on' ? '사용 중' : '사용 가능'}
-              </span>
-            </div>
-            
-            {/* 확장 모드 컨텐츠 */}
-            {expandedRoom === room.id && (
-              <div style={styles.expandButtons}>
-                <button 
-                  style={styles.expandButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    apiIncreaseVolume(room.id);
-                  }}
-                >
-                  소리 키우기
-                </button>
-                <button 
-                  style={styles.expandButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    apiDecreaseVolume(room.id);
-                  }}
-                >
-                  소리 줄이기
-                </button>
-                <button 
-                  style={styles.expandButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    apiTurnOnMic(room.id);
-                  }}
-                >
-                  마이크 켜기
-                </button>
-                <button 
-                  style={styles.expandButton}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    apiTurnOffMic(room.id);
-                  }}
-                >
-                  마이크 끄기
-                </button>
-                <div style={{textAlign: 'right', marginTop: '10px'}}>
-                  <button
-                    style={{
-                      border: 'none',
-                      backgroundColor: 'transparent',
-                      color: mainColor,
-                      cursor: 'pointer',
-                      fontSize: '14px'
-                    }}
-                    onClick={(e) => toggleRoomExpand(room.id, e)}
-                  >
-                    접기 ▲
-                  </button>
-                </div>
-              </div>
-            )}
-            
-            {/* 토글 버튼 (접히지 않은 상태일 때만 표시) */}
-            {expandedRoom !== room.id && (
-              <div style={{textAlign: 'center', marginTop: '10px'}}>
+              <div style={styles.roomHeaderContent}>
+                <span style={styles.roomTitle}>회의실 {room.id}</span>
                 <button
                   style={{
-                    border: 'none',
-                    backgroundColor: 'transparent',
-                    color: mainColor,
-                    cursor: 'pointer',
-                    fontSize: '14px'
+                    ...styles.pairingButton,
+                    backgroundColor: room.pairing ? 'rgba(49, 130, 246, 0.1)' : 'rgba(233, 236, 239, 0.5)',
+                    color: mainColor
                   }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    apiTogglePairing(room.id, !room.pairing);
+                  }}
+                >
+                  페어링
+                </button>
+                <span style={styles.location}>{room.location}</span>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <span 
+                  style={{
+                    ...styles.statusText,
+                    color: room.status === 'on' ? '#D32F2F' : mainColor
+                  }}
+                >
+                </span>
+                <div 
+                  style={{
+                    ...styles.statusIndicator,
+                    backgroundColor: room.status === 'on' ? mainColor : '#BDBDBD'
+                  }}
+                ></div>
+              </div>
+            </div>
+            
+            <div style={styles.roomControls}>
+              {expandedRoom !== room.id && (
+                <button
+                  style={styles.expandToggle}
                   onClick={(e) => toggleRoomExpand(room.id, e)}
                 >
                   더 보기 ▼
                 </button>
-              </div>
-            )}
+              )}
+            </div>
             
-            {/* 선택된 회의실에 추가 설정 메뉴 표시 */}
-            {selectedRoom === room.id && expandedRoom !== room.id && (
-              <div style={styles.settingsPanel}>
-                <div style={styles.settingsTitle}>회의실 {room.id} 설정</div>
-                
-                {/* 상태 토글 버튼 */}
-                <button
-                  style={{
-                    ...styles.statusToggleButton,
-                    backgroundColor: room.status === 'on' ? 'rgba(211, 47, 47, 0.1)' : 'rgba(49, 130, 246, 0.1)',
-                    color: room.status === 'on' ? '#D32F2F' : mainColor
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    apiToggleRoomStatus(room.id, room.status === 'on' ? 'off' : 'on');
-                  }}
-                >
-                  <span>상태 변경</span>
-                  <span>{room.status === 'on' ? '사용 중 → 사용 가능' : '사용 가능 → 사용 중'}</span>
-                </button>
-                
-                {/* 볼륨 조절 */}
-                <div style={styles.sliderContainer}>
-                  <div style={styles.sliderHeader}>
-                    <span style={styles.sliderLabel}>음량</span>
-                    <span style={styles.sliderLabel}>{roomSettings[room.id]?.volume || 0}%</span>
+            {/* 확장 모드 컨텐츠 */}
+            {expandedRoom === room.id && (
+              <div style={{marginTop: 'px'}}>
+                <div style={styles.expandButtons}>
+                  <div style={styles.expandButtonsRow}>
+                    <button 
+                      style={styles.expandButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        apiIncreaseVolume(room.id);
+                      }}
+                    >
+                      소리 키우기
+                    </button>
+                    <button 
+                      style={styles.expandButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        apiDecreaseVolume(room.id);
+                      }}
+                    >
+                      소리 줄이기
+                    </button>
                   </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={roomSettings[room.id]?.volume || 0}
-                    onChange={(e) => {
-                      const newVolume = parseInt(e.target.value);
-                      setRoomSettings(prev => ({
-                        ...prev,
-                        [room.id]: { ...prev[room.id], volume: newVolume }
-                      }));
-                      apiAdjustVolume(room.id, newVolume);
-                    }}
-                    style={styles.slider}
-                  />
-                </div>
-                
-                {/* 조명 조절 */}
-                <div style={styles.sliderContainer}>
-                  <div style={styles.sliderHeader}>
-                    <span style={styles.sliderLabel}>조명</span>
-                    <span style={styles.sliderLabel}>{roomSettings[room.id]?.lighting || 0}%</span>
+                  <div style={styles.expandButtonsRow}>
+                    <button 
+                      style={styles.expandButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        apiTurnOnMic(room.id);
+                      }}
+                    >
+                      마이크 켜기
+                    </button>
+                    <button 
+                      style={styles.expandButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        apiTurnOffMic(room.id);
+                      }}
+                    >
+                      마이크 끄기
+                    </button>
                   </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={roomSettings[room.id]?.lighting || 0}
-                    onChange={(e) => {
-                      const newLighting = parseInt(e.target.value);
-                      setRoomSettings(prev => ({
-                        ...prev,
-                        [room.id]: { ...prev[room.id], lighting: newLighting }
-                      }));
-                      apiAdjustLighting(room.id, newLighting);
-                    }}
-                    style={styles.slider}
-                  />
-                </div>
-                
-                {/* 추가 버튼들 */}
-                <div style={styles.buttonRow}>
                   <button
-                    style={styles.utilityButton}
-                    onClick={(e) => e.stopPropagation()}
+                    style={styles.closeExpandButton}
+                    onClick={(e) => toggleRoomExpand(room.id, e)}
                   >
-                    예약 관리
-                  </button>
-                  <button
-                    style={styles.utilityButton}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    화상회의 설정
+                    접기 ▲
                   </button>
                 </div>
               </div>
