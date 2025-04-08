@@ -167,18 +167,16 @@ const ConferenceRoomDashboard = () => {
       overflow: 'hidden',
       backgroundColor: 'white',
       cursor: 'pointer',
-      padding: '0.5rem',
+      padding: '1rem',
       borderLeft: '4px solid transparent',
       transition: 'all 0.2s ease',
-      height: 'auto',
-      minHeight: '60px',
       '&:hover': {
         transform: 'translateY(-2px)',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
       }
     },
     expandedCard: {
-      minHeight: '200px',
+      minHeight: '240px',
       backgroundColor: '#f0f7ff',
       gridRow: 'span 2',
       zIndex: 10,
@@ -218,15 +216,15 @@ const ConferenceRoomDashboard = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: '0',
+      marginTop: '0.75rem',
     },
     pairingButton: {
-      fontSize: '0.75rem',
-      padding: '0.15rem 0.5rem',
+      fontSize: '0.875rem',
+      padding: '0.25rem 0.75rem',
       borderRadius: '1rem',
       border: 'none',
       cursor: 'pointer',
-      height: '1.5rem',
+      height: '1.75rem',
       backgroundColor: 'rgba(49, 130, 246, 0.1)',
       color: mainColor,
       fontWeight: '500',
@@ -243,15 +241,12 @@ const ConferenceRoomDashboard = () => {
       backgroundColor: 'transparent',
       color: mainColor,
       cursor: 'pointer',
-      fontSize: '1rem',
-      padding: '0.25rem',
-      margin: '0 auto',
+      fontSize: '0.875rem',
+      padding: '0.25rem 0.75rem',
+      margin: '0.25rem auto',
       textAlign: 'center',
-      fontWeight: 'bold',
+      fontWeight: '500',
       transition: 'all 0.2s ease',
-      display: 'flex',
-      justifyContent: 'center',
-      width: '100%',
       '&:hover': {
         color: '#1c64f2'
       }
@@ -376,31 +371,24 @@ const ConferenceRoomDashboard = () => {
           >
             <div style={{
               ...styles.roomHeader,
-              padding: '0',
-              margin: '0',
+              padding: '0.25rem 0',
               borderBottom: expandedRoom === room.id ? '1px solid rgba(49, 130, 246, 0.1)' : 'none'
             }}>
               <div style={{
                 display: 'flex', 
-                alignItems: 'center',
-                gap: '0.25rem'
+                alignItems: 'center'
               }}>
-                <span style={{...styles.roomTitle, fontSize: '0.875rem'}}>회의실 {room.id}</span>
-                <span style={{...styles.location, fontSize: '0.7rem'}}>{room.id % 9 === 0 ? 9 : room.id % 9}호 {Math.ceil(room.id / 9)}층</span>
+                <span style={styles.roomTitle}>회의실 {room.id}</span>
               </div>
 
               <div style={{
                 display: 'flex', 
                 alignItems: 'center', 
-                gap: '0.5rem',
-                marginLeft: '-0.15rem'
+                gap: '0.75rem'
               }}>
                 <button
                   style={{
                     ...styles.pairingButton,
-                    height: '1.25rem',
-                    fontSize: '0.7rem', 
-                    padding: '0.1rem 0.4rem',
                     backgroundColor: room.pairing ? 'rgba(49, 130, 246, 0.15)' : 'rgba(233, 236, 239, 0.7)',
                   }}
                   onClick={(e) => {
@@ -411,40 +399,35 @@ const ConferenceRoomDashboard = () => {
                   페어링
                 </button>
                 
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem'
-              }}>
-                <span 
-                  style={{
-                    fontSize: '0.65rem',
-                    fontWeight: '500',
-                    color: room.status === 'on' ? '#e53e3e' : '#10b981',
-                  }}
-                >
-                  {room.status === 'on' ? '사용 중' : '사용 가능'}
-                </span>
-                <div 
-                  style={{
-                    ...styles.statusIndicator,
-                    width: '0.6rem',
-                    height: '0.6rem',
-                    backgroundColor: room.status === 'on' ? '#3182F6' : '#9CA3AF'
-                  }}
-                ></div>
-              </div>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}>
+                  <span 
+                    style={{
+                      fontSize: '0.75rem',
+                      fontWeight: '500',
+                      color: room.status === 'on' ? '#e53e3e' : '#10b981',
+                    }}
+                  >
+                  </span>
+                  <div 
+                    style={{
+                      ...styles.statusIndicator,
+                      backgroundColor: room.status === 'on' ? '#3182F6' : '#9CA3AF'
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
             
-            <div style={{
-              ...styles.roomControls,
-              marginTop: '0'
-            }}>
+            <div style={styles.roomControls}>
               {expandedRoom !== room.id && (
                 <button
                   style={{
-                    ...styles.expandToggle
+                    ...styles.expandToggle,
+                    marginTop: '0.5rem'
                   }}
                   onClick={(e) => toggleRoomExpand(room.id, e)}
                 >
@@ -531,11 +514,12 @@ const ConferenceRoomDashboard = () => {
                 <button
                   style={{
                     ...styles.closeExpandButton,
-                    padding: '0.5rem'
+                    padding: '0.5rem',
+                    marginTop: '0.75rem'
                   }}
                   onClick={(e) => toggleRoomExpand(room.id, e)}
                 >
-                  ▲
+                  접기 ▲
                 </button>
               </div>
             )}
