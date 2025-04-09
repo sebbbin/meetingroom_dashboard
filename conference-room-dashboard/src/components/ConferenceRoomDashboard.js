@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 
 const ConferenceRoomDashboard = () => {
-  // 총 54개의 회의실 데이터 (6x9 그리드)
+  // 회의실 번호 목록
+  const roomNumbers = [
+    '4-1', '4-2', '4-4', '4-7', '4-9', '4-10', '4-11', '4-12',
+    '10-1', '10-2', '10-3', 
+    '11-6', '11-7', '11-8', '11-9', '11-10', '11-11', '11-12', '11-13',
+    '12-1', '12-2', '12-3', '12-4', '12-5', '12-6', '12-7',
+    '13-1', '13-2', '13-5', '13-6', '13-7',
+    '22-1', '22-2', '22-3', '22-4', '22-8', '22-9', '22-10', '22-11', '22-12', '22-13',
+    '23-1', '23-2', '23-3', '23-4', '23-5', '23-6', '23-7'
+  ];
+
+  // 회의실 데이터 초기화 (실제 번호 사용)
   const [rooms, setRooms] = useState(
-    Array.from({ length: 54 }, (_, index) => ({
+    roomNumbers.map((roomNumber, index) => ({
       id: index + 1,
+      roomNumber: roomNumber,
       status: Math.random() > 0.5 ? 'on' : 'off',
       pairing: Math.random() > 0.7,
     }))
@@ -68,7 +80,7 @@ const ConferenceRoomDashboard = () => {
   // 온/오프 회의실 수 및 목록 계산
   const onRooms = rooms.filter(room => room.status === 'on');
   const onRoomsCount = onRooms.length;
-  const onRoomsList = onRooms.map(room => room.id).join(', ');
+  const onRoomsList = onRooms.map(room => room.roomNumber).join(', ');
   const offRoomsCount = rooms.filter(room => room.status === 'off').length;
 
   // 메인 색상
@@ -128,7 +140,8 @@ const ConferenceRoomDashboard = () => {
       padding: '0.75rem 1rem',
       fontSize: '0.875rem',
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
-      borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+      borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+      overflowWrap: 'break-word'
     },
     buttonContainer: {
       display: 'flex', 
@@ -150,10 +163,7 @@ const ConferenceRoomDashboard = () => {
     },
     buttonInactive: {
       backgroundColor: 'white',
-      color: '#333333',
-      '&:hover': {
-        backgroundColor: '#f8fafc'
-      }
+      color: '#333333'
     },
     gridContainer: {
       display: 'grid',
@@ -169,11 +179,7 @@ const ConferenceRoomDashboard = () => {
       cursor: 'pointer',
       padding: '1rem',
       borderLeft: '4px solid transparent',
-      transition: 'all 0.2s ease',
-      '&:hover': {
-        transform: 'translateY(-2px)',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-      }
+      transition: 'all 0.2s ease'
     },
     expandedCard: {
       minHeight: '240px',
@@ -231,10 +237,7 @@ const ConferenceRoomDashboard = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      transition: 'all 0.2s ease',
-      '&:hover': {
-        backgroundColor: 'rgba(49, 130, 246, 0.15)'
-      }
+      transition: 'all 0.2s ease'
     },
     expandToggle: {
       border: 'none',
@@ -246,10 +249,7 @@ const ConferenceRoomDashboard = () => {
       margin: '0.25rem auto',
       textAlign: 'center',
       fontWeight: '500',
-      transition: 'all 0.2s ease',
-      '&:hover': {
-        color: '#1c64f2'
-      }
+      transition: 'all 0.2s ease'
     },
     expandButtons: {
       display: 'flex',
@@ -274,10 +274,7 @@ const ConferenceRoomDashboard = () => {
       fontSize: '0.875rem',
       flex: 1,
       fontWeight: '500',
-      transition: 'all 0.2s ease',
-      '&:hover': {
-        backgroundColor: 'rgba(49, 130, 246, 0.15)'
-      }
+      transition: 'all 0.2s ease'
     },
     closeExpandButton: {
       border: 'none',
@@ -289,10 +286,7 @@ const ConferenceRoomDashboard = () => {
       marginTop: '0.5rem',
       width: '100%',
       fontWeight: '500',
-      transition: 'all 0.2s ease',
-      '&:hover': {
-        color: '#1c64f2'
-      }
+      transition: 'all 0.2s ease'
     }
   };
 
@@ -358,7 +352,6 @@ const ConferenceRoomDashboard = () => {
               ...(expandedRoom === room.id ? styles.expandedCard : {})
             }}
             onClick={(e) => {
-              // 클릭했을 때 설정 메뉴가 아닌 확장 토글 버튼이 나타나도록 수정
               if (selectedRoom === room.id) {
                 setSelectedRoom(null); // 설정 패널 닫기
               } else {
@@ -378,7 +371,7 @@ const ConferenceRoomDashboard = () => {
                 display: 'flex', 
                 alignItems: 'center'
               }}>
-                <span style={styles.roomTitle}>회의실 {room.id}</span>
+                <span style={styles.roomTitle}>회의실 {room.roomNumber}</span>
               </div>
 
               <div style={{
@@ -519,7 +512,7 @@ const ConferenceRoomDashboard = () => {
                   }}
                   onClick={(e) => toggleRoomExpand(room.id, e)}
                 >
-                  접기 ▲
+                   ▲
                 </button>
               </div>
             )}
